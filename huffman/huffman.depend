@@ -1,0 +1,33 @@
+# depslib dependency file v1.0
+1392562482 source:/media/8A6C59386C591FED/C++_programs/SDP/project/Huffman-s_algorithm/huffman/main.cpp
+	<iostream>
+	<fstream>
+	"MinHeap.h"
+	"HuffmanTree.h"
+	"CompressFile.h"
+
+1392498025 /media/8A6C59386C591FED/C++_programs/SDP/project/Huffman-s_algorithm/huffman/MinHeap.h
+	<iostream>
+
+1392630156 source:/media/8A6C59386C591FED/C++_programs/SDP/project/Huffman-s_algorithm/huffman/HuffmanTree.cpp
+	"HuffmanTree.h"
+	"MinHeap.h"
+
+1392630156 /media/8A6C59386C591FED/C++_programs/SDP/project/Huffman-s_algorithm/huffman/HuffmanTree.h
+	<iostream>
+	<fstream>
+	<string>
+	"CharCode.h"
+
+1392630213 /media/8A6C59386C591FED/C++_programs/SDP/project/Huffman-s_algorithm/huffman/CharCode.h
+	<iostream>
+
+1392547243 source:/media/8A6C59386C591FED/C++_programs/SDP/project/Huffman-s_algorithm/huffman/CharCode.cpp
+	"CharCode.h"
+	<cstring>
+
+1392630547 /media/8A6C59386C591FED/C++_programs/SDP/project/Huffman-s_algorithm/huffman/CompressFile.h
+	"HuffmanTree.h"
+	<iostream>
+	<cstring>
+
