@@ -119,7 +119,7 @@ void HuffmanTree::DeleteTree(Node*& node)
     node = NULL;
 }
 
-bool HuffmanTree::containsChar(Node* node, uchar symbol)const
+bool HuffmanTree::containsChar(Node* node, char symbol)const
 {
     if(!node)
         return false;
@@ -132,20 +132,29 @@ bool HuffmanTree::containsChar(Node* node, uchar symbol)const
     else return this->containsChar(node->right, symbol);
 }
 
-CharCode HuffmanTree::generateCode(uchar symbol)const
+void HuffmanTree::generateCode(char symbol,CharCode& result)const
 {
-   return this->generateCode(this->root, symbol);
+    this->generateCode(this->root, symbol, result);
 }
 
-CharCode HuffmanTree::generateCode(Node* node, uchar symbol)const
+void HuffmanTree::generateCode(Node* node, char symbol, CharCode& result)const
 {
     if(node->isLeaf())
-       return "";
+    {
+        return;
+    }
 
    if(this->containsChar(node->left, symbol))
-        return "0" + this->generateCode(node->left, symbol);
+   {
+       this->generateCode(node->left, symbol, result += '0');
+       return;
+   }
 
-   else return "1" + this->generateCode(node->right, symbol);
+   else
+   {
+       this->generateCode(node->right, symbol, result += '1');
+       return;
+   }
 }
 
 size_t HuffmanTree::getNumbOfLeaves()const

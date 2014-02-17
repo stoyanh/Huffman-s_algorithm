@@ -32,8 +32,6 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="CharCode.cpp" />
-		<Unit filename="CharCode.h" />
 		<Unit filename="DecompressFile.h" />
 		<Unit filename="HuffmanTree.cpp" />
 		<Unit filename="HuffmanTree.h" />

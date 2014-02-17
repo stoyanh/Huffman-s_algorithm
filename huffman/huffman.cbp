@@ -33,6 +33,8 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="BinSearchTree.h" />
+		<Unit filename="BitSet.cpp" />
+		<Unit filename="BitSet.h" />
 		<Unit filename="CharCode.cpp" />
 		<Unit filename="CharCode.h" />
 		<Unit filename="CompressFile.h" />

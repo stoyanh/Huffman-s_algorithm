@@ -3,18 +3,25 @@
 #include "HuffmanTree.h"
 #include <iostream>
 #include <cstring>
+#include "BitSet.h"
 
 
-void concatenateCodes(ifstream& file, CharCode& result, HuffmanTree& tree)
+void FillBitSet(ifstream& file, BitSet& result, HuffmanTree& tree)
 {
     file.clear();
     file.seekg(0, ios::beg);
-
+    CharCode allreadyKnown[256];
     while(!file.eof())
     {
         char symbol;
         file.get(symbol);
-        result += tree.generateCode((uchar)symbol);
+        if(allreadyKnown[(int)symbol].getSize())
+            result += allreadyKnown[(int)symbol];
+        else
+        {
+            tree.generateCode(symbol, allreadyKnown[(int)symbol]);
+            result += allreadyKnown[(int)symbol];
+        }
     }
 }
 
@@ -28,7 +35,7 @@ void writeLeavesInFile(ofstream& file, Node* node)
         CompressedNode tmp;
         tmp.ch = node->ch;
         tmp.freq = node->freq;
-        file.write((const char*)&tmp, sizeof(tmp));
+        file.write((const char*)&tmp, sizeof(CompressedNode));
         return;
     }
 
@@ -36,13 +43,15 @@ void writeLeavesInFile(ofstream& file, Node* node)
     writeLeavesInFile(file, node->right);
 }
 
-void writeArrayInFile(ofstream& file, uchar* array, int codeSize)
+void writeArrayInFile(ofstream& file,const BitSet& result)
 {
+    int codeSize = result.getCurrentIndex();
+    const uchar* data = result.getData();
     file.write((const char*) &codeSize, sizeof(int));
-    file.write((const char*)array, (codeSize / 8 + 1) * sizeof(uchar));
+    file.write((const char*)data, (codeSize / 8 + 1) * sizeof(uchar));
 }
 
-void writeBinaryFile(const char* filename, HuffmanTree& tree, uchar* info, int codeSize)
+void writeBinaryFile(const char* filename, HuffmanTree& tree, BitSet& result)
 {
     ofstream file(filename, ios::binary);
     if(!file)
@@ -52,11 +61,12 @@ void writeBinaryFile(const char* filename, HuffmanTree& tree, uchar* info, int c
 
     file.write((const char*) &numbOfLeaves, sizeof(int));
     writeLeavesInFile(file, tree.getRoot());
-    writeArrayInFile(file, info, codeSize);
+    writeArrayInFile(file, result);
 
     file.close();
 
 }
+
 
 void Compress(const char* filepath)
 {
@@ -66,26 +76,10 @@ void Compress(const char* filepath)
 
     HuffmanTree tree(file);
 
-    CharCode result;
-    concatenateCodes(file, result, tree);
+    BitSet result;
+    FillBitSet(file, result, tree);
 
-    int codeSize = result.getSize();
-    const int arrSize = codeSize / 8 + 1;
-
-
-    uchar data[arrSize];
-    memset(data, 0, arrSize);
-
-    /// fill array with bits
-    size_t index = 0;
-    char* code = (char*) result.getCode();
-
-    for( ; *code ; ++code , ++index)
-        data[index / 8] = data[index / 8] | ( ((*code) - '0') << (8 - index % 8 - 1));
-
-     writeBinaryFile("compressed", tree, data, codeSize);
-
-
+    writeBinaryFile("compressed", tree, result);
 }
 
 

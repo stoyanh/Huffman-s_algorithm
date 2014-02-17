@@ -31,8 +31,6 @@ Node* BuildHuffmanTree(CompressedNode* leaves, int numbOfLeaves)
         heap.push(f);
     }
 
-    delete [] leaves;
-
     while(heap.getSize() != 1)
     {
         Freq f1;
@@ -71,7 +69,7 @@ void WriteInFile(const char* filepath, HuffmanTree& tree, uchar* data, int codeS
             file << node->ch;
             node = tree.getRoot();
         }
-        if((data[i / 8] >> (8 - (i % 8) - 1) & 1) == 0)
+        if(((data[i / 8] >> (8 - (i % 8) - 1)) & 1) == 0)
           node = node->left;
 
         else node = node->right;
@@ -100,6 +98,8 @@ void Decompress(const char* filepath)
     Node* node = BuildHuffmanTree(leaves, numbOfLeaves);
     HuffmanTree tree(node);
 
+    delete [] leaves;
+
     int codeSize;
     file.read((char*) &codeSize, sizeof(int));
 
@@ -107,6 +107,8 @@ void Decompress(const char* filepath)
     file.read((char*)data, (codeSize / 8 + 1) * sizeof(uchar));
 
     WriteInFile("Decompressed", tree, data, codeSize);
+
+    delete [] data;
 }
 
 

@@ -53,7 +53,7 @@ CharCode& CharCode::operator=(const CharCode& source)
 
 CharCode operator+(const CharCode& left, const CharCode& right)
 {
-    char* tmp = new char [left.size + right.size + 1];
+    char* tmp = new char [left.currentCount + right.currentCount + 1];
 
     strcpy(tmp, left.code);
     strcat(tmp, right.code);
@@ -67,3 +67,9 @@ CharCode& CharCode::operator+=(const CharCode& right)
     return *this;
 }
 
+CharCode& CharCode::operator+=(char symbol)
+{
+    this->code[this->currentCount++] = symbol;
+    this->code[this->currentCount] = '\0';
+    return *this;
+}

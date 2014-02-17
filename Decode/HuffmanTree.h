@@ -13,7 +13,7 @@ typedef unsigned char uchar;
 
 struct Node
 {
-    uchar ch;
+    char ch;
     Node* left;
     Node* right;
     ulong freq;
@@ -33,7 +33,7 @@ struct Freq
 
 struct CompressedNode
 {
-    uchar ch;
+    char ch;
     ulong freq;
 };
 
@@ -49,11 +49,11 @@ public:
     Node* getRoot()const{ return this->root;}
     size_t getNumbOfLeaves()const;
 
-    CharCode generateCode(uchar)const;
+    CharCode generateCode(char)const;
 private:
     size_t getNumbOfLeaves(Node*)const;
-    CharCode generateCode(Node*, uchar)const;
-    bool containsChar(Node*, uchar symbol)const;
+    CharCode generateCode(Node*, char)const;
+    bool containsChar(Node*, char symbol)const;
     void CopyTree(Node*&,Node*);
     void DeleteTree(Node*&);
 

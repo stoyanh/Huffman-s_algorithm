@@ -119,7 +119,7 @@ void HuffmanTree::DeleteTree(Node*& node)
     node = NULL;
 }
 
-bool HuffmanTree::containsChar(Node* node, uchar symbol)const
+bool HuffmanTree::containsChar(Node* node, char symbol)const
 {
     if(!node)
         return false;
@@ -132,12 +132,12 @@ bool HuffmanTree::containsChar(Node* node, uchar symbol)const
     else return this->containsChar(node->right, symbol);
 }
 
-CharCode HuffmanTree::generateCode(uchar symbol)const
+CharCode HuffmanTree::generateCode(char symbol)const
 {
    return this->generateCode(this->root, symbol);
 }
 
-CharCode HuffmanTree::generateCode(Node* node, uchar symbol)const
+CharCode HuffmanTree::generateCode(Node* node, char symbol)const
 {
     if(node->isLeaf())
        return "";
