@@ -10,11 +10,11 @@
 1392498025 /media/8A6C59386C591FED/C++_programs/SDP/project/Huffman-s_algorithm/huffman/MinHeap.h
 	<iostream>
 
-1392642217 source:/media/8A6C59386C591FED/C++_programs/SDP/project/Huffman-s_algorithm/huffman/HuffmanTree.cpp
+1392716913 source:/media/8A6C59386C591FED/C++_programs/SDP/project/Huffman-s_algorithm/huffman/HuffmanTree.cpp
 	"HuffmanTree.h"
 	"MinHeap.h"
 
-1392641632 /media/8A6C59386C591FED/C++_programs/SDP/project/Huffman-s_algorithm/huffman/HuffmanTree.h
+1392716511 /media/8A6C59386C591FED/C++_programs/SDP/project/Huffman-s_algorithm/huffman/HuffmanTree.h
 	<iostream>
 	<fstream>
 	<string>
@@ -27,7 +27,7 @@
 	"CharCode.h"
 	<cstring>
 
-1392664351 /media/8A6C59386C591FED/C++_programs/SDP/project/Huffman-s_algorithm/huffman/CompressFile.h
+1392717880 /media/8A6C59386C591FED/C++_programs/SDP/project/Huffman-s_algorithm/huffman/CompressFile.h
 	"HuffmanTree.h"
 	<iostream>
 	<cstring>

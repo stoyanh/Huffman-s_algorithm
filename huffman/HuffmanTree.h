@@ -47,6 +47,7 @@ public:
     ~HuffmanTree();
     HuffmanTree& operator=(const HuffmanTree&);
     Node* getRoot()const{ return this->root;}
+    Node** getLeaves()const{ return this->leaves; }
     size_t getNumbOfLeaves()const;
 
     void generateCode(char,CharCode&)const;
@@ -57,6 +58,7 @@ private:
     void CopyTree(Node*&,Node*);
     void DeleteTree(Node*&);
 
+    Node** leaves;
     Node* root;
 };
 

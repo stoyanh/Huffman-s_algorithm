@@ -25,6 +25,8 @@ HuffmanTree::HuffmanTree(ifstream& file)
         ++symbols[(int)ch];
     }
 
+   this->leaves = new Node*[256];
+
    MinHeap<Freq> heap;
    for(size_t i = 0 ; i < 256 ; ++i)
    {
@@ -33,10 +35,12 @@ HuffmanTree::HuffmanTree(ifstream& file)
            Node* node = new Node;
            node->freq = symbols[i];
            node->ch = (char)i;
+           this->leaves[i] = node;
            //cout << i << " " << symbols[i] << endl;
            Freq f(node);
            heap.push(f);
        }
+       else this->leaves[i] = NULL;
    }
 
    if(!heap.getSize())
@@ -71,6 +75,7 @@ HuffmanTree::HuffmanTree(ifstream& file)
 HuffmanTree::~HuffmanTree()
 {
     this->DeleteTree(this->root);
+    delete [] this->leaves;
 }
 
 HuffmanTree::HuffmanTree(const HuffmanTree& source)

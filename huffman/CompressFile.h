@@ -25,22 +25,19 @@ void FillBitSet(ifstream& file, BitSet& result, HuffmanTree& tree)
     }
 }
 
-void writeLeavesInFile(ofstream& file, Node* node)
+void writeLeavesInFile(ofstream& file, HuffmanTree& tree)
 {
-    if(node == NULL)
-        return;
-
-    if(node->isLeaf())
+    Node** leaves = tree.getLeaves();
+    for(size_t i = 0 ; i < 256 ; ++i)
     {
-        CompressedNode tmp;
-        tmp.ch = node->ch;
-        tmp.freq = node->freq;
-        file.write((const char*)&tmp, sizeof(CompressedNode));
-        return;
+        if(leaves[i] != NULL)
+        {
+            CompressedNode tmp;
+            tmp.ch = leaves[i]->ch;
+            tmp.freq = leaves[i]->freq;
+            file.write((const char*) &tmp, sizeof(CompressedNode));
+        }
     }
-
-    writeLeavesInFile(file, node->left);
-    writeLeavesInFile(file, node->right);
 }
 
 void writeArrayInFile(ofstream& file,const BitSet& result)
@@ -60,7 +57,7 @@ void writeBinaryFile(const char* filename, HuffmanTree& tree, BitSet& result)
     int numbOfLeaves = tree.getNumbOfLeaves();
 
     file.write((const char*) &numbOfLeaves, sizeof(int));
-    writeLeavesInFile(file, tree.getRoot());
+    writeLeavesInFile(file, tree);
     writeArrayInFile(file, result);
 
     file.close();
